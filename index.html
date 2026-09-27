@@ -182,6 +182,30 @@ footer{background:var(--canvas);padding:48px 0 24px;}
   .testi p{font-size:16px;}
   .price-card.on{order:-1;}
 }
+
+/* AUTH MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,10,14,.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s ease;}
+.modal-backdrop.show{opacity:1;pointer-events:auto;}
+.modal{background:#fff;border-radius:24px;padding:28px;width:100%;max-width:392px;position:relative;box-shadow:0 40px 90px -20px rgba(0,0,0,.4);transform:translateY(10px) scale(.98);transition:transform .22s ease;max-height:88vh;overflow-y:auto;}
+.modal-backdrop.show .modal{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:999px;background:var(--fill);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);}
+.modal-close svg{width:13px;height:13px;}
+.modal-head{text-align:center;padding-top:4px;}
+.modal-head .logo{justify-content:center;}
+.modal h3{font-size:19px;margin:16px 0 4px;text-align:center;}
+.modal p.sub{color:var(--muted);font-size:13px;text-align:center;margin:0;}
+.auth-tabs{display:flex;background:var(--fill);border-radius:999px;padding:4px;margin:22px 0 22px;}
+.auth-tabs button{flex:1;border:none;background:transparent;padding:9px 0;border-radius:999px;font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;}
+.auth-tabs button.on{background:var(--ink);color:#fff;}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.field label{font-size:12px;font-weight:700;}
+.field input{border:1px solid var(--border);background:var(--white);border-radius:12px;padding:11px 13px;font-size:13.5px;font-family:var(--sans);color:var(--text);outline:none;width:100%;}
+.field input:focus{border-color:#b9d977;box-shadow:0 0 0 3px rgba(210,239,105,.35);}
+.forgot{display:block;text-align:right;font-size:12px;color:var(--muted);font-weight:600;margin:-6px 0 16px;}
+.modal .full{width:100%;justify-content:center;padding:12px 0;font-size:13.5px;}
+.modal-switch{text-align:center;font-size:12.5px;color:var(--muted);margin-top:18px;}
+.modal-switch a{color:var(--ink);font-weight:700;}
+.modal-fine{text-align:center;font-size:11px;color:var(--muted2);margin-top:14px;line-height:1.5;}
 </style>
 </head>
 <body>
@@ -196,8 +220,8 @@ footer{background:var(--canvas);padding:48px 0 24px;}
       <a href="dashboard.html">Product</a>
     </div>
     <div class="nav-actions">
-      <a class="login" href="dashboard.html">Log in</a>
-      <a class="btn-dark" href="dashboard.html">Get started</a>
+      <a class="login js-login" href="dashboard.html">Log in</a>
+      <a class="btn-dark js-signup" href="dashboard.html">Get started</a>
       <button class="menu-btn" id="menuBtn"><svg viewBox="0 0 24 24" stroke-width="2.2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
     </div>
   </div>
@@ -206,7 +230,7 @@ footer{background:var(--canvas);padding:48px 0 24px;}
     <a href="#how">How it works</a>
     <a href="#pricing">Pricing</a>
     <a href="dashboard.html">Product</a>
-    <a href="dashboard.html">Log in</a>
+    <a href="dashboard.html" class="js-login">Log in</a>
   </div>
 </div>
 
@@ -216,7 +240,7 @@ footer{background:var(--canvas);padding:48px 0 24px;}
     <h1>Solar permits, <span>without</span> the paperwork chaos.</h1>
     <p class="sub">Permitly tracks every AHJ requirement, flags at-risk projects before they slip, and keeps your whole pipeline — from design to PTO — in one place.</p>
     <div class="ctas">
-      <a class="btn-dark" href="dashboard.html"><svg viewBox="0 0 24 24" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Get started free</a>
+      <a class="btn-dark js-signup" href="dashboard.html"><svg viewBox="0 0 24 24" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Get started free</a>
       <a class="btn-ghost" href="#how"><svg viewBox="0 0 24 24" stroke-width="2"><polygon points="6 4 20 12 6 20 6 4"/></svg>See how it works</a>
     </div>
     <div class="fine">14-day free trial · No credit card required</div>
@@ -319,7 +343,7 @@ footer{background:var(--canvas);padding:48px 0 24px;}
           <li><svg viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Basic risk alerts</li>
           <li><svg viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>1 team seat</li>
         </ul>
-        <a class="btn-ghost" href="dashboard.html">Start free</a>
+        <a class="btn-ghost js-signup" href="dashboard.html">Start free</a>
       </div>
       <div class="price-card on">
         <span class="badge-pop">Most popular</span>
@@ -332,7 +356,7 @@ footer{background:var(--canvas);padding:48px 0 24px;}
           <li><svg viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>Document automation</li>
           <li><svg viewBox="0 0 24 24" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>10 team seats</li>
         </ul>
-        <a class="btn-lime" href="dashboard.html">Get started</a>
+        <a class="btn-lime js-signup" href="dashboard.html">Get started</a>
       </div>
       <div class="price-card">
         <div class="tier">Enterprise</div>
@@ -354,7 +378,7 @@ footer{background:var(--canvas);padding:48px 0 24px;}
     <div class="cta-final" style="padding:56px 24px;">
       <h2>Stop losing permits to paperwork.</h2>
       <p>Start free — see your first risk report in under 10 minutes.</p>
-      <a class="btn-dark" href="dashboard.html">Get started free</a>
+      <a class="btn-dark js-signup" href="dashboard.html">Get started free</a>
     </div>
   </div>
 </section>
@@ -371,9 +395,73 @@ footer{background:var(--canvas);padding:48px 0 24px;}
   </div>
 </footer>
 
+<div class="modal-backdrop" id="authBackdrop">
+  <div class="modal" id="authModalCard">
+    <button class="modal-close" id="authClose" aria-label="Close" type="button"><svg viewBox="0 0 24 24" stroke-width="2.4"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg></button>
+    <div class="modal-head">
+      <span class="logo"><span class="box"><i></i><i></i><i></i><i></i></span>Permitly</span>
+    </div>
+
+    <div class="auth-tabs">
+      <button type="button" class="on" data-tab="login">Log in</button>
+      <button type="button" data-tab="signup">Sign up</button>
+    </div>
+
+    <div class="auth-pane" data-pane="login">
+      <h3>Welcome back</h3>
+      <p class="sub">Log in to your Permitly account</p>
+      <div style="height:20px;"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+      <div class="field" style="margin-bottom:6px;"><label>Password</label><input type="password" placeholder="••••••••"></div>
+      <a class="forgot" href="#">Forgot password?</a>
+      <button type="button" class="btn-dark full">Log in</button>
+      <p class="modal-switch">Don't have an account? <a href="#" data-switch="signup">Sign up</a></p>
+    </div>
+
+    <div class="auth-pane" data-pane="signup" style="display:none;">
+      <h3>Create your account</h3>
+      <p class="sub">Start your 14-day free trial</p>
+      <div style="height:20px;"></div>
+      <div class="field"><label>Full name</label><input type="text" placeholder="Nizam Bakri"></div>
+      <div class="field"><label>Company</label><input type="text" placeholder="Sunridge Solar"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+      <div class="field" style="margin-bottom:18px;"><label>Password</label><input type="password" placeholder="Create a password"></div>
+      <button type="button" class="btn-lime full">Create account</button>
+      <p class="modal-fine">By signing up you agree to Permitly's Terms &amp; Privacy Policy.</p>
+      <p class="modal-switch">Already have an account? <a href="#" data-switch="login">Log in</a></p>
+    </div>
+  </div>
+</div>
+
 <script>
 var menuBtn=document.getElementById('menuBtn'), mnav=document.getElementById('mnav');
 menuBtn.addEventListener('click',function(){mnav.classList.toggle('open');});
+
+(function(){
+  var backdrop=document.getElementById('authBackdrop');
+  var closeBtn=document.getElementById('authClose');
+  var tabs=backdrop.querySelectorAll('.auth-tabs button');
+  var panes=backdrop.querySelectorAll('.auth-pane');
+  function setTab(name){
+    tabs.forEach(function(t){t.classList.toggle('on', t.getAttribute('data-tab')===name);});
+    panes.forEach(function(p){p.style.display = (p.getAttribute('data-pane')===name) ? '' : 'none';});
+  }
+  function openModal(mode){ setTab(mode||'login'); backdrop.classList.add('show'); document.body.style.overflow='hidden'; }
+  function closeModal(){ backdrop.classList.remove('show'); document.body.style.overflow=''; }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ setTab(t.getAttribute('data-tab')); }); });
+  backdrop.querySelectorAll('[data-switch]').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); setTab(a.getAttribute('data-switch')); });
+  });
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', function(e){ if(e.target===backdrop) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+  document.querySelectorAll('.js-login').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openModal('login'); if(mnav) mnav.classList.remove('open'); });
+  });
+  document.querySelectorAll('.js-signup').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openModal('signup'); if(mnav) mnav.classList.remove('open'); });
+  });
+})();
 </script>
 </body>
 </html>
